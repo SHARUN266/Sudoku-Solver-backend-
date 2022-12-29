@@ -1,8 +1,8 @@
 import { getSudoku } from "sudoku-gen";
-export default function QuestionBoard(){
-    let sudoku = getSudoku("easy");
+export default function QuestionBoard() {
+  let sudoku = getSudoku("easy");
+
   sudoku = sudoku.puzzle;
-  console.log(sudoku);
   let count = 0;
   let temp = [];
   for (var i = 0; i < 9; i++) {
@@ -17,6 +17,6 @@ export default function QuestionBoard(){
     temp.push(str);
     count = count + 9;
   }
-  
-  return temp
+
+  return temp;
 }
