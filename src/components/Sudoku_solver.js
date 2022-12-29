@@ -1,13 +1,22 @@
+ let solved = [];
 let count = 0;
-
- function SolverSudoku(board, row, col) {
-  if (row == 9) {
+ function Sudoku(mat, row, col) {
+  if (row === 9) {
     count++;
-    return board
-    
+
+    for (var i = 0; i < 9; i++) {
+      var str = [];
+      for (var j = 0; j < 9; j++) {
+        str.push(mat[i][j]);
+      }
+
+      solved.push(str);
+    }
+
+    return solved;
   }
-  let newRow = 0;
-  let newCol = 0;
+  var newRow = 0;
+  var newCol = 0;
   if (col == 8) {
     newRow = row + 1;
     newCol = 0;
@@ -15,39 +24,34 @@ let count = 0;
     newRow = row;
     newCol = col + 1;
   }
-
-  if (board[row][col] != 0) {
-    SolverSudoku(board, newRow, newCol);
+  if (mat[row][col] !== 0) {
+    Sudoku(mat, newRow, newCol);
   } else {
     for (var i = 1; i <= 9; i++) {
-      if (CheckSafe(board, row, col, i) == true) {
-        board[row][col] = i;
-        SolverSudoku(board, newRow, newCol);
-        board[row][col] = 0;
+      if (checkFunction(mat, row, col, i) == true) {
+        mat[row][col] = i;
+        Sudoku(mat, newRow, newCol);
+        mat[row][col] = 0;
       }
     }
   }
 }
-
-function CheckSafe(board, row, col, value) {
+function checkFunction(mat, row, col, value) {
   for (var i = 0; i < 9; i++) {
-    if (board[i][col] == value) {
+    if (mat[row][i] === value) {
       return false;
     }
   }
   for (var i = 0; i < 9; i++) {
-    if (board[row][i] == value) {
+    if (mat[i][col] == value) {
       return false;
     }
   }
-
-  // Check value in grid our value exist or not
-  var x = Math.floor(row / 3) * 3;
-  var y = Math.floor(col / 3) * 3;
-
-  for (var l = 0; l < 3; l++) {
-    for (var m = 0; m < 3; m++) {
-      if (board[l + x][m + y] == value) {
+  let x = Math.floor(row / 3) * 3;
+  let y = Math.floor(col / 3) * 3;
+  for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 3; j++) {
+      if (mat[i + x][j + y] == value) {
         return false;
       }
     }
@@ -55,6 +59,5 @@ function CheckSafe(board, row, col, value) {
   return true;
 }
 
-function GetValue(board){
-   
-}
+
+export {solved,Sudoku}

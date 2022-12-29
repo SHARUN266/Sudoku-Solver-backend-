@@ -1,10 +1,9 @@
-import { Flex, Stack } from "@chakra-ui/react";
+import { Flex, Spinner, Stack } from "@chakra-ui/react";
 import React from "react";
-import QuestionBoard from "../components/Board";
+
 import SingleBox from "../components/Box";
 
-
-function Board({question}) {
+function Board({ loading, question }) {
   return (
     <>
       <Stack
@@ -16,15 +15,36 @@ function Board({question}) {
         shadow={"lg"}
         borderRadius={"lg"}
         justifyContent={"center"}
+        alignItems={"center"}
         gap={"20%"}
       >
-        {question?.map((e) => (
-          <Flex h="40px" alignItems={"center"} justifyContent={"space-between"}>
-            {e?.map((el) => (
-              <SingleBox key={el.id} value={el} />
-            ))}
-          </Flex>
-        ))}
+        {loading ? (
+          <>
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+           <p>Please wait...</p>
+           <p>We are solving your Sudoku</p>
+          </>
+           
+         
+        ) : (
+          question?.map((e) => (
+            <Flex
+              h="40px"
+              alignItems={"center"}
+              justifyContent={"space-between"}
+            >
+              {e?.map((el) => (
+                <SingleBox key={el.id} value={el} />
+              ))}
+            </Flex>
+          ))
+        )}
       </Stack>
     </>
   );
