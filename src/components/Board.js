@@ -1,5 +1,5 @@
 import { getSudoku } from "sudoku-gen";
-export default function Board(){
+export default function QuestionBoard(){
     let sudoku = getSudoku("easy");
   sudoku = sudoku.puzzle;
   console.log(sudoku);

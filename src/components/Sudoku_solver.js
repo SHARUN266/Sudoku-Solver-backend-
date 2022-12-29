@@ -1,10 +1,10 @@
 let count = 0;
 
-function SolverSudoku(board, row, col) {
+ function SolverSudoku(board, row, col) {
   if (row == 9) {
-    Print(board);
     count++;
-    return;
+    return board
+    
   }
   let newRow = 0;
   let newCol = 0;
@@ -54,41 +54,7 @@ function CheckSafe(board, row, col, value) {
   }
   return true;
 }
-// Print out board
-function Print(board) {
-  for (let i = 0; i < board.length; i++) {
-    console.log(board[i].join(" "));
-  }
+
+function GetValue(board){
+   
 }
-function runProgram(input) {
-  input = input.trim().split("\n");
-
-  var mat = [];
-
-  for (var i = 0; i < 9; i++) {
-    var arr = input[i].trim().split(" ").map(Number);
-
-    mat.push(arr);
-  }
-
-  SolverSudoku(mat, 0, 0);
-  if (count == 0) {
-    console.log(-1);
-  }
-}
-
-process.stdin.resume();
-process.stdin.setEncoding("ascii");
-let read = "";
-process.stdin.on("data", function (input) {
-  read += input;
-});
-process.stdin.on("end", function () {
-  read = read.replace(/\n$/, "");
-  runProgram(read);
-});
-process.on("SIGINT", function () {
-  read = read.replace(/\n$/, "");
-  runProgram(read);
-  process.exit(0);
-});
