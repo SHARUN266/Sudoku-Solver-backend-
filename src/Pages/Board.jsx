@@ -39,12 +39,14 @@ function Board({ setSolve, loading, question }) {
         ) : (
           question?.map((e, r) => (
             <Flex
+            key={r}
               h="40px"
               alignItems={"center"}
               justifyContent={"space-between"}
             >
               {e?.map((el, c) => (
                 <Input
+                key={c}
                   value={el}
                   display={"flex"}
                   type={"number"}
