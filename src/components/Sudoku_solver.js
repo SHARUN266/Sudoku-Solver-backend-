@@ -1,20 +1,19 @@
- let solved = [];
-let count = 0;
- function Sudoku(mat, row, col) {
+function SudokuSolver(mat, row, col) {
   if (row === 9) {
-    count++;
-
     for (var i = 0; i < 9; i++) {
-      var str = [];
+    
       for (var j = 0; j < 9; j++) {
-        str.push(mat[i][j]);
+        if(mat[i][j]==0){
+          return false
+        }
       }
 
-      solved.push(str);
+      
     }
 
-    return solved;
+    return true;
   }
+ 
   var newRow = 0;
   var newCol = 0;
   if (col == 8) {
@@ -25,16 +24,17 @@ let count = 0;
     newCol = col + 1;
   }
   if (mat[row][col] !== 0) {
-    Sudoku(mat, newRow, newCol);
+    SudokuSolver(mat, newRow, newCol);
   } else {
     for (var i = 1; i <= 9; i++) {
       if (checkFunction(mat, row, col, i) == true) {
         mat[row][col] = i;
-        Sudoku(mat, newRow, newCol);
+        SudokuSolver(mat, newRow, newCol);
         mat[row][col] = 0;
       }
     }
   }
+  return false
 }
 function checkFunction(mat, row, col, value) {
   for (var i = 0; i < 9; i++) {
@@ -59,5 +59,11 @@ function checkFunction(mat, row, col, value) {
   return true;
 }
 
-
-export {solved,Sudoku}
+export default function ProblemGenerate(puzzle) {
+  if(SudokuSolver(puzzle, 0, 0))
+  {
+    console.log(puzzle)
+  }else{
+    console.log("kya")
+  }
+}
