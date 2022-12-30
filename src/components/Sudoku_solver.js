@@ -1,69 +1,63 @@
-function SudokuSolver(mat, row, col) {
-  if (row === 9) {
-    for (var i = 0; i < 9; i++) {
+let count=0
+
+export default function SolverSudoku(board,row,col){
+    if(row==9){
+        // Print(board)
+        count++
+        return board
+    }
+    let newRow=0;
+    let newCol=0;
+    if(col==8){
+        newRow=row+1;
+        newCol=0
+    }else{
+        newRow=row
+        newCol=col+1
+    }
     
-      for (var j = 0; j < 9; j++) {
-        if(mat[i][j]==0){
-          return false
+    if(board[row][col]!=0){
+        SolverSudoku(board,newRow,newCol)
+    }else{
+        for(var i=1;i<=9;i++){
+           if(CheckSafe(board,row,col,i)==true){
+               board[row][col]=i
+               SolverSudoku(board,newRow,newCol)
+               board[row][col]=0
+           }
         }
-      }
-
-      
     }
+}
 
+function CheckSafe(board,row,col,value){
+    
+     for(var i=0;i<9;i++){
+         if(board[i][col]==value){
+             return false
+         }
+     }
+     for(var i=0;i<9;i++){
+         if(board[row][i]==value){
+             return false
+         }
+     }
+     
+     // Check value in grid our value exist or not
+      var x = Math.floor(row/3)*3;
+    var y = Math.floor(col/3)*3;
+
+    for(var l=0;l<3;l++){
+        for(var m=0;m<3;m++){
+            if( board[l+x][m+y] == value){
+                return false
+            }
+        }
+    }
     return true;
-  }
- 
-  var newRow = 0;
-  var newCol = 0;
-  if (col == 8) {
-    newRow = row + 1;
-    newCol = 0;
-  } else {
-    newRow = row;
-    newCol = col + 1;
-  }
-  if (mat[row][col] !== 0) {
-    SudokuSolver(mat, newRow, newCol);
-  } else {
-    for (var i = 1; i <= 9; i++) {
-      if (checkFunction(mat, row, col, i) == true) {
-        mat[row][col] = i;
-        SudokuSolver(mat, newRow, newCol);
-        mat[row][col] = 0;
-      }
-    }
-  }
-  return false
 }
-function checkFunction(mat, row, col, value) {
-  for (var i = 0; i < 9; i++) {
-    if (mat[row][i] === value) {
-      return false;
+// Print out board
+function Print(board){
+    for(let i=0;i<board.length;i++){
+        console.log(board[i].join(" "))
     }
-  }
-  for (var i = 0; i < 9; i++) {
-    if (mat[i][col] == value) {
-      return false;
-    }
-  }
-  let x = Math.floor(row / 3) * 3;
-  let y = Math.floor(col / 3) * 3;
-  for (var i = 0; i < 3; i++) {
-    for (var j = 0; j < 3; j++) {
-      if (mat[i + x][j + y] == value) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-export default function ProblemGenerate(puzzle) {
-  if(SudokuSolver(puzzle, 0, 0))
-  {
-    console.log(puzzle)
-  }else{
-    console.log("kya")
-  }
 }

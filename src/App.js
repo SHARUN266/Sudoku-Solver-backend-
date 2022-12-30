@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Example from "./components/Board";
 import ProblemGenerate from "./components/Sudoku_solver";
+import SolverSudoku from "./components/Sudoku_solver";
 
 function App() {
   let puzzle = Array(9)
@@ -16,15 +17,18 @@ function App() {
   const [flag, setFlag] = useState(false);
 
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    Example(puzzle);
-    setSolve(puzzle);
+  Example(puzzle)
+  
+  // useEffect(() => {
+  //   Example(puzzle);
+  //   setSolve(puzzle);
 
-    // startCounter();
-  }, [flag]);
+  //   // startCounter();
+  // }, [flag]);
   async function handleSolve() {
-    let a=ProblemGenerate(solve);
-     console.log(a)
+     let a = SolverSudoku(puzzle, 0, 0);
+     console.log(a);
+    
     // setLoading(true);
     // setTimeout(() => {
     //   setSolve(a);
