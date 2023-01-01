@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, Flex, Input, Stack } from "@chakra-ui/react";
-export default function SingleBox({  }) {
+export default function SingleBox({ value }) {
   return (
     <Input
-
+    
       value={value}
       display={"flex"}
       
