@@ -10,7 +10,7 @@ export default function SingleBox({ value }) {
       borderRadius={"sm"}
       shadow={"lg"}
       h="20px"
-      p="15px"
+      p="16px"
       alignItems={"center"}
       border={"1px solid lightGray"}
       textAlign={"center"}
