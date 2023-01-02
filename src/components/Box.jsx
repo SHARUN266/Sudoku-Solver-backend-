@@ -13,7 +13,7 @@ export default function SingleBox({ value }) {
       p="16px"
       alignItems={"center"}
       border={"1px solid lightGray"}
-      //textAlign={"center"}
+    textAlign={"center"}
     />
   );
 }
